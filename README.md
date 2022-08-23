@@ -15,8 +15,8 @@ RSS is a specialized format designed to describe news feeds, announcements of ar
 3. Change directory to frontend-project-11
 4. Run the command: ```make install-deps```
 ```shell
-$ git clone git@github.com:Kalifull/frontend-project-lvl2.git
-$ cd frontend-project-lvl2
+$ git clone git@github.com:Kalifull//frontend-project-11.git
+$ cd frontend-project-11
 $ make install-deps
 ```
 ## Run webpack production:
