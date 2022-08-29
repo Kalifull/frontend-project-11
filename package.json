@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "RSS Agregator",
   "main": "./src/index.js",
+  "type": "module",
   "private": true,
   "scripts": {
     "build": "webpack --mode=production --node-env=production",
