@@ -1,8 +1,9 @@
 import i18n from 'i18next';
-import _ from 'lodash';
 import onChange from 'on-change';
-import resources from './locales/index.js';
+import isEmpty from 'lodash/isEmpty.js';
+
 import initView from './render/view.js';
+import resources from './locales/index.js';
 import validate from './utils/validate.js';
 
 export default async () => {
@@ -59,10 +60,10 @@ export default async () => {
     const url = formData.get('url').trim();
     const errors = validate(url, watchedState.feeds, i18nInstance);
 
-    watchedState.form.valid = _.isEmpty(errors);
+    watchedState.form.valid = isEmpty(errors);
     watchedState.form.processStateError = errors;
 
-    if (watchedState.form.valid === false) {
+    if (!watchedState.form.valid) {
       watchedState.form.processState = 'failed';
       return;
     }

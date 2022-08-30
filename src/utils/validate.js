@@ -17,7 +17,7 @@ export default (link, feeds, i18nInstance) => {
 
   try {
     schema.validateSync(link, { abortEarly: false });
-    return null;
+    return {};
   } catch (error) {
     return error;
   }
