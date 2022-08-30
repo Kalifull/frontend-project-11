@@ -1,14 +1,27 @@
+import i18n from 'i18next';
 import _ from 'lodash';
 import onChange from 'on-change';
+import resources from './locales/index.js';
 import initView from './render/view.js';
 import validate from './utils/validate.js';
 
-export default () => {
+export default async () => {
+  const defaultLanguage = 'ru';
+
+  const i18nInstance = i18n.createInstance();
+
+  await i18nInstance.init({
+    lng: defaultLanguage,
+    debug: false,
+    resources,
+  });
+
   const elements = {
     rssForm: {
       form: document.querySelector('.rss-form'),
       submitButton: document.querySelector('button[type="submit"]'),
       input: document.querySelector('.form-control'),
+      feedback: document.querySelector('.feedback'),
     },
   };
 
@@ -32,7 +45,7 @@ export default () => {
     posts: [],
   };
 
-  const watchedState = onChange(state, initView(elements));
+  const watchedState = onChange(state, initView(elements, i18nInstance));
 
   const { form } = elements.rssForm;
 
@@ -44,7 +57,7 @@ export default () => {
 
     const formData = new FormData(event.target);
     const url = formData.get('url').trim();
-    const errors = validate(url, watchedState.feeds);
+    const errors = validate(url, watchedState.feeds, i18nInstance);
 
     watchedState.form.valid = _.isEmpty(errors);
     watchedState.form.processStateError = errors;

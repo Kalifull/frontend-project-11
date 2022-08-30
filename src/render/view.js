@@ -1,13 +1,13 @@
 import handleProcessState from './handleProcessState.js';
 import handleProcessStateError from './handleProcessStateError.js';
 
-export default (elements) => (path, value) => {
+export default (elements, i18nInstance) => (path, value) => {
   switch (path) {
     case 'form.processState':
-      handleProcessState(elements, value);
+      handleProcessState(elements, value, i18nInstance);
       break;
     case 'form.processStateError':
-      handleProcessStateError(elements, value);
+      handleProcessStateError(elements, value, i18nInstance);
       break;
     default:
       break;

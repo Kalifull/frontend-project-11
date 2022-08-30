@@ -1,11 +1,16 @@
-export default (elements, processState) => {
-  const { form, submitButton, input } = elements.rssForm;
+export default (elements, processState, i18nInstance) => {
+  const {
+    form, submitButton, input, feedback,
+  } = elements.rssForm;
 
   switch (processState) {
     case 'filling':
       submitButton.disabled = false;
       form.reset();
       input.focus();
+      feedback.classList.remove('text-danger');
+      feedback.classList.add('text-success');
+      feedback.textContent = i18nInstance.t('form.successMessages.validUrl');
       break;
 
     case 'sending':
