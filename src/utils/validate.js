@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-export default (link, feeds, i18nInstance) => {
+export default async (link, feeds, i18nInstance) => {
   const existedFeeds = feeds.map(({ url }) => url);
 
   yup.setLocale({
@@ -16,7 +16,7 @@ export default (link, feeds, i18nInstance) => {
   const schema = yup.string().url().notOneOf(existedFeeds).required();
 
   try {
-    schema.validateSync(link, { abortEarly: false });
+    await schema.validate(link, { abortEarly: false });
     return {};
   } catch (error) {
     return error;
