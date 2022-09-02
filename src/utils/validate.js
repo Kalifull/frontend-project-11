@@ -1,7 +1,9 @@
 import * as yup from 'yup';
 
-export default async (link, feeds, i18nInstance) => {
-  const existedFeeds = feeds.map(({ url }) => url);
+export default async (link, watchedState, i18nInstance) => {
+  watchedState.form.processState = 'sending';
+
+  const existedFeeds = watchedState.feeds.map(({ url }) => url);
 
   yup.setLocale({
     string: {
