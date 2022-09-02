@@ -8,11 +8,9 @@ export default {
         duplicateUrl: 'RSS уже существует',
         networkError: 'Ошибка сети',
       },
-      successMessage: {
-        validUrl: 'RSS успешно загружен',
-      },
     },
     loadingProcess: {
+      idle: 'RSS успешно загружен',
       loading: 'Идет загрузка RSS. Пожалуйста, подождите...',
       failed: 'Упс... что-то пошло не так =(. Попробуйте еще раз',
     },
