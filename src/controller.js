@@ -20,5 +20,6 @@ export default async (url, watchedState) => {
   } catch (error) {
     watchedState.loadingProcess.status = 'failed';
     watchedState.loadingProcess.loadingProcessError = error;
+    console.log(error);
   }
 };
