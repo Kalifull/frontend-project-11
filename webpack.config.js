@@ -8,6 +8,7 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 const config = {
+  watch: true,
   mode: 'production',
   entry: './src/index.js',
   output: {
