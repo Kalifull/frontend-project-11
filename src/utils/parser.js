@@ -1,4 +1,4 @@
-export default (response) => {
+export default (response, url, watchedState) => {
   const parser = new DOMParser();
   const XMLDocument = parser.parseFromString(response.data.contents, 'application/xml');
 
@@ -11,5 +11,26 @@ export default (response) => {
     throw error;
   }
 
-  return XMLDocument;
+  watchedState.feeds.push({ url });
+
+  const feedTitle = XMLDocument.querySelector('title').textContent;
+  const descriptionTitle = XMLDocument.querySelector('description').textContent;
+
+  const rssPosts = [...XMLDocument.querySelectorAll('item')];
+
+  const items = rssPosts.map((item) => ({
+    title: item.querySelector('title').textContent,
+    description: item.querySelector('description').textContent,
+    link: item.querySelector('link').textContent,
+  }));
+
+  const rss = {
+    channel: {
+      feedTitle,
+      descriptionTitle,
+    },
+    items,
+  };
+
+  return rss;
 };
