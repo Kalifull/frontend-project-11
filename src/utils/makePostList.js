@@ -9,7 +9,4 @@ export default (channel, items, watchedState) => {
   }));
 
   watchedState.posts.unshift(...posts);
-
-  watchedState.loadingProcess.status = 'idle';
-  watchedState.form.processState = 'loaded';
 };
