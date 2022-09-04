@@ -25,6 +25,10 @@ export default async () => {
       input: document.querySelector('.form-control'),
       feedback: document.querySelector('.feedback'),
     },
+    containers: {
+      feeds: document.querySelector('.feeds'),
+      posts: document.querySelector('.posts'),
+    },
   };
 
   const state = {
@@ -67,12 +71,10 @@ export default async () => {
 
     if (!watchedState.form.valid) {
       watchedState.form.processState = 'failed';
-      console.log(watchedState);
       return;
     }
 
     await displayData(url, watchedState);
     watchedState.form.processState = 'filling';
-    console.log(watchedState);
   });
 };

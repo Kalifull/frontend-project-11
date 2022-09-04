@@ -12,14 +12,19 @@ export default async (url, watchedState) => {
   try {
     const response = await axios.get(routes.usersPath(url, watchedState));
 
-    const data = parse(response, url, watchedState);
+    const data = parse(response, url);
+
+    watchedState.loadingProcess.status = 'idle';
 
     const { channel, items } = data;
+
+    watchedState.form.processState = 'loaded';
+
+    watchedState.feeds.unshift(channel);
 
     makePostList(channel, items, watchedState);
   } catch (error) {
     watchedState.loadingProcess.status = 'failed';
     watchedState.loadingProcess.loadingProcessError = error;
-    console.log(error);
   }
 };

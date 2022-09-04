@@ -1,4 +1,6 @@
-export default (elements, processState) => {
+import renderCards from './renderCards.js';
+
+export default (elements, processState, i18nInstance) => {
   const { form, submitButton, input } = elements.rssForm;
 
   switch (processState) {
@@ -16,6 +18,7 @@ export default (elements, processState) => {
 
     case 'loaded': {
       form.reset();
+      renderCards(elements, i18nInstance);
       break;
     }
 
