@@ -1,4 +1,4 @@
-export default (response, url, watchedState) => {
+export default (response, url) => {
   const parser = new DOMParser();
   const XMLDocument = parser.parseFromString(response.data.contents, 'application/xml');
 
@@ -10,8 +10,6 @@ export default (response, url, watchedState) => {
     error.name = 'ParserError';
     throw error;
   }
-
-  watchedState.feeds.push({ url });
 
   const feedTitle = XMLDocument.querySelector('title').textContent;
   const descriptionTitle = XMLDocument.querySelector('description').textContent;
@@ -26,6 +24,7 @@ export default (response, url, watchedState) => {
 
   const rss = {
     channel: {
+      url,
       feedTitle,
       descriptionTitle,
     },
