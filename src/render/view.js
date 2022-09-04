@@ -1,3 +1,5 @@
+import renderFeeds from './renderFeeds.js';
+import renderPosts from './renderPosts.js';
 import handleProcessState from './handleProcessState.js';
 import handleProcessStateError from './handleProcessStateError.js';
 import handleLoadingProcessState from './handleLoadingProcessState.js';
@@ -10,7 +12,7 @@ export default (elements, i18nInstance) => (state, value) => {
       break;
 
     case 'form.processState':
-      handleProcessState(elements, value);
+      handleProcessState(elements, value, i18nInstance);
       break;
 
     case 'form.processStateError':
@@ -23,6 +25,14 @@ export default (elements, i18nInstance) => (state, value) => {
 
     case 'loadingProcess.loadingProcessError':
       handleLoadingProcessError(elements, value, i18nInstance);
+      break;
+
+    case 'feeds':
+      renderFeeds(value);
+      break;
+
+    case 'posts':
+      renderPosts(value, i18nInstance);
       break;
 
     default:
