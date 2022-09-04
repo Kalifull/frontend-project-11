@@ -24,4 +24,4 @@ $ make install-deps
 $ make build
 ```
 ## Look at the finished project:
-## :rocket: [Deploy](https://frontend-project-11-atuumaee5-kalifull.vercel.app/)
+## :rocket: [Deploy](https://frontend-project-11-kohl.vercel.app/)
