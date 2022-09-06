@@ -12,11 +12,9 @@ export default async (url, watchedState) => {
   try {
     const response = await axios.get(routes.usersPath(url, watchedState));
 
-    const data = parse(response, url);
+    const { channel, items } = parse(response, url);
 
     watchedState.loadingProcess.status = 'idle';
-
-    const { channel, items } = data;
 
     watchedState.form.processState = 'loaded';
 
