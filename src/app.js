@@ -2,10 +2,10 @@ import i18n from 'i18next';
 import onChange from 'on-change';
 import isEmpty from 'lodash/isEmpty.js';
 
-import initView from './render/view.js';
+import initView from './view.js';
+import displayData from './controller.js';
 import validate from './utils/validate.js';
 import resources from './locales/index.js';
-import displayData from './controller.js';
 
 export default async () => {
   const defaultLanguage = 'ru';
