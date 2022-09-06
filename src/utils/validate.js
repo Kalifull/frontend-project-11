@@ -1,17 +1,17 @@
 import * as yup from 'yup';
 
-export default async (link, watchedState, i18nInstance) => {
+export default async (link, watchedState) => {
   watchedState.form.processState = 'sending';
 
   const existedFeeds = watchedState.feeds.map(({ url }) => url);
 
   yup.setLocale({
     string: {
-      url: i18nInstance.t('form.errorMessages.invalidUrl'),
+      url: () => ({ key: 'form.errorMessages.invalidUrl' }),
     },
     mixed: {
-      required: i18nInstance.t('form.errorMessages.requiredField'),
-      notOneOf: i18nInstance.t('form.errorMessages.duplicateUrl'),
+      required: () => ({ key: 'form.errorMessages.requiredField' }),
+      notOneOf: () => ({ key: 'form.errorMessages.duplicateUrl' }),
     },
   });
 

@@ -6,14 +6,36 @@ import initView from './view.js';
 import displayData from './controller.js';
 import validate from './utils/validate.js';
 import resources from './locales/index.js';
+import switchLanguage from './utils/switchLanguage.js';
 
 export default async () => {
   const defaultLanguage = 'ru';
 
+  const state = {
+    lng: defaultLanguage,
+    form: {
+      valid: true,
+      processState: 'filling',
+      processStateError: null,
+    },
+    loadingProcess: {
+      status: null,
+      loadingProcessError: null,
+    },
+    // modal: {
+    //   postId: null,
+    // },
+    // uiState: {
+    //   seenPosts: new Set(),
+    // },
+    feeds: [],
+    posts: [],
+  };
+
   const i18nInstance = i18n.createInstance();
 
   await i18nInstance.init({
-    lng: defaultLanguage,
+    lng: state.lng,
     debug: false,
     resources,
   });
@@ -29,29 +51,10 @@ export default async () => {
       feeds: document.querySelector('.feeds'),
       posts: document.querySelector('.posts'),
     },
+    languageSelector: document.querySelectorAll('[data-lng]'),
   };
 
-  const state = {
-    form: {
-      valid: true,
-      processState: 'filling',
-      processStateError: null,
-    },
-    loadingProcess: {
-      status: 'idle',
-      loadingProcessError: null,
-    },
-    // modal: {
-    //   postId: null,
-    // },
-    // uiState: {
-    //   seenPosts: new Set(),
-    // },
-    feeds: [],
-    posts: [],
-  };
-
-  const watchedState = onChange(state, initView(elements, i18nInstance));
+  const watchedState = onChange(state, initView(elements, i18nInstance, state));
 
   const { form } = elements.rssForm;
 
@@ -61,10 +64,10 @@ export default async () => {
     const formData = new FormData(event.target);
     const url = formData.get('url').trim();
 
+    watchedState.loadingProcess.status = null;
     watchedState.loadingProcess.loadingProcessError = null;
-    watchedState.loadingProcess.status = 'idle';
 
-    const validationError = await validate(url, watchedState, i18nInstance);
+    const validationError = await validate(url, watchedState);
 
     watchedState.form.valid = isEmpty(validationError);
     watchedState.form.processStateError = validationError;
@@ -77,4 +80,6 @@ export default async () => {
     await displayData(url, watchedState);
     watchedState.form.processState = 'filling';
   });
+
+  switchLanguage(elements, watchedState);
 };

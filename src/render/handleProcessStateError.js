@@ -15,7 +15,7 @@ export default (elements, error, i18nInstance) => {
 
       feedback.classList.remove('text-success');
       feedback.classList.add('text-danger');
-      const errorMessage = i18nInstance.t(error.message);
+      const errorMessage = i18nInstance.t(error.message.key);
       feedback.textContent = errorMessage;
       break;
     }

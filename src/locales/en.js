@@ -2,7 +2,7 @@ export default {
   translation: {
     form: {
       errorMessages: {
-        notContainValidRss: 'Ресурс не содержит валидный RSS',
+        notContainValidRss: 'The resource does not contain valid RSS',
         invalidUrl: 'Link must be a valid URL',
         requiredField: 'The field must not be empty',
         duplicateUrl: 'RSS already exists',

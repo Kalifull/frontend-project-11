@@ -3,6 +3,10 @@ import renderFeedback from './renderFeedback.js';
 export default (elements, status, i18nInstance) => {
   const { feedback } = elements.rssForm;
 
+  if (!status) {
+    return;
+  }
+
   switch (status) {
     case 'idle': {
       feedback.classList.add('text-success');
