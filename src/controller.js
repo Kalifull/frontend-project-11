@@ -5,22 +5,23 @@ import buildRequest from './utils/buildRequest.js';
 import makePostList from './utils/makePostList.js';
 
 const routes = {
-  usersPath: (url, watchedState) => buildRequest(url, watchedState),
+  usersPath: (url) => buildRequest(url),
 };
 
 export default async (url, watchedState) => {
   try {
-    const response = await axios.get(routes.usersPath(url, watchedState));
+    watchedState.loadingProcess.status = 'loading';
 
-    const { channel, items } = parse(response, url);
+    const response = await axios.get(routes.usersPath(url));
+
+    const { channel, posts } = parse(response, url);
 
     watchedState.loadingProcess.status = 'idle';
-
     watchedState.form.processState = 'loaded';
 
-    watchedState.feeds.unshift(channel);
-
-    makePostList(channel, items, watchedState);
+    watchedState.feedsСontainer.unshift(channel);
+    const postList = makePostList(channel, posts);
+    watchedState.postsСontainer.unshift(...postList);
   } catch (error) {
     watchedState.loadingProcess.status = 'failed';
     watchedState.loadingProcess.loadingProcessError = error;

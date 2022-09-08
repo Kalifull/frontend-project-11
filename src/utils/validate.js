@@ -3,7 +3,7 @@ import * as yup from 'yup';
 export default async (link, watchedState) => {
   watchedState.form.processState = 'sending';
 
-  const existedFeeds = watchedState.feeds.map(({ url }) => url);
+  const existedUrl = watchedState.feedsСontainer.map(({ url }) => url);
 
   yup.setLocale({
     string: {
@@ -15,7 +15,7 @@ export default async (link, watchedState) => {
     },
   });
 
-  const schema = yup.string().url().notOneOf(existedFeeds).required();
+  const schema = yup.string().url().notOneOf(existedUrl).required();
 
   try {
     await schema.validate(link, { abortEarly: false });

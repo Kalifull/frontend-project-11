@@ -1,6 +1,4 @@
-export default (url, watchedState) => {
-  watchedState.loadingProcess.status = 'loading';
-
+export default (url) => {
   const proxy = 'https://allorigins.hexlet.app';
   const parsedUrl = new URL('get', proxy);
 

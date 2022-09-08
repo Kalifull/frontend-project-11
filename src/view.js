@@ -27,10 +27,10 @@ const renderTextLanguage = (state, elements, i18nInstance) => {
   renderInitialTexts(elements, i18nInstance);
   renderFeedback(elements, state.form.feedback, i18nInstance);
 
-  if (!isEmpty(state.feeds)) {
+  if (!isEmpty(state.feedsСontainer)) {
     renderCards(elements, i18nInstance);
-    renderFeeds(state.feeds);
-    renderPosts(state.posts, i18nInstance);
+    renderFeeds(state.feedsСontainer);
+    renderPosts(state.postsСontainer, i18nInstance);
   }
 };
 
@@ -62,11 +62,11 @@ export default (elements, i18nInstance, state) => (path, value) => {
       handleLoadingProcessError(elements, value, state);
       break;
 
-    case 'feeds':
+    case 'feedsСontainer':
       renderFeeds(value);
       break;
 
-    case 'posts':
+    case 'postsСontainer':
       renderPosts(value, i18nInstance);
       break;
 

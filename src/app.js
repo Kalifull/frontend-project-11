@@ -3,6 +3,7 @@ import onChange from 'on-change';
 import isEmpty from 'lodash/isEmpty.js';
 
 import initView from './view.js';
+import updater from './utils/updater.js';
 import displayData from './controller.js';
 import validate from './utils/validate.js';
 import resources from './locales/index.js';
@@ -29,8 +30,8 @@ export default async () => {
     // uiState: {
     //   seenPosts: new Set(),
     // },
-    feeds: [],
-    posts: [],
+    feedsСontainer: [],
+    postsСontainer: [],
   };
 
   const i18nInstance = i18n.createInstance();
@@ -89,4 +90,5 @@ export default async () => {
   });
 
   switchLanguage(elements, watchedState);
+  updater(watchedState);
 };

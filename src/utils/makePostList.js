@@ -1,12 +1,12 @@
 import { uniqueId } from 'lodash';
 
-export default (channel, items, watchedState) => {
+export default (channel, posts) => {
   channel.id = uniqueId();
 
-  const posts = items.map((item) => Object.assign(item, {
+  const postsList = posts.map((post) => Object.assign(post, {
     feedId: channel.id,
     postId: uniqueId(),
   }));
 
-  watchedState.posts.unshift(...posts);
+  return postsList;
 };

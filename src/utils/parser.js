@@ -14,9 +14,9 @@ export default (response, url) => {
   const feedTitle = XMLDocument.querySelector('title').textContent;
   const descriptionTitle = XMLDocument.querySelector('description').textContent;
 
-  const rssPosts = [...XMLDocument.querySelectorAll('item')];
+  const items = [...XMLDocument.querySelectorAll('item')];
 
-  const items = rssPosts.map((item) => ({
+  const posts = items.map((item) => ({
     title: item.querySelector('title').textContent,
     description: item.querySelector('description').textContent,
     link: item.querySelector('link').textContent,
@@ -28,7 +28,7 @@ export default (response, url) => {
       feedTitle,
       descriptionTitle,
     },
-    items,
+    posts,
   };
 
   return rss;
