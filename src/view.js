@@ -3,18 +3,33 @@ import isEmpty from 'lodash/isEmpty.js';
 import renderCards from './render/renderCards.js';
 import renderFeeds from './render/renderFeeds.js';
 import renderPosts from './render/renderPosts.js';
+import renderFeedback from './render/renderFeedback.js';
 import handleProcessState from './render/handleProcessState.js';
 import handleProcessStateError from './render/handleProcessStateError.js';
 import handleLoadingProcessState from './render/handleLoadingProcessState.js';
 import handleLoadingProcessError from './render/handleLoadingProcessError.js';
 
-const renderTextLanguage = (state, elements, i18nInstance) => {
-  handleProcessStateError(elements, state.form.processStateError, i18nInstance);
-  handleLoadingProcessState(elements, state.loadingProcess.status, i18nInstance);
-  handleLoadingProcessError(elements, state.loadingProcess.loadingProcessError, i18nInstance);
+const renderInitialTexts = (elements, i18nInstance) => {
+  const {
+    input, header, examples, description,
+  } = elements.initialTexts;
 
-  if (!isEmpty(state.posts)) {
+  const { submitButton } = elements.rssForm;
+
+  input.textContent = i18nInstance.t('initialTexts.input');
+  header.textContent = i18nInstance.t('initialTexts.header');
+  examples.textContent = i18nInstance.t('initialTexts.examples');
+  description.textContent = i18nInstance.t('initialTexts.description');
+  submitButton.textContent = i18nInstance.t('initialTexts.submitButton');
+};
+
+const renderTextLanguage = (state, elements, i18nInstance) => {
+  renderInitialTexts(elements, i18nInstance);
+  renderFeedback(elements, state.form.feedback, i18nInstance);
+
+  if (!isEmpty(state.feeds)) {
     renderCards(elements, i18nInstance);
+    renderFeeds(state.feeds);
     renderPosts(state.posts, i18nInstance);
   }
 };
@@ -22,8 +37,9 @@ const renderTextLanguage = (state, elements, i18nInstance) => {
 export default (elements, i18nInstance, state) => (path, value) => {
   switch (path) {
     case 'lng':
-      i18nInstance.changeLanguage(value);
-      renderTextLanguage(state, elements, i18nInstance);
+      i18nInstance
+        .changeLanguage(value)
+        .then(() => renderTextLanguage(state, elements, i18nInstance));
       break;
 
     case 'form.valid':
@@ -35,15 +51,15 @@ export default (elements, i18nInstance, state) => (path, value) => {
       break;
 
     case 'form.processStateError':
-      handleProcessStateError(elements, value, i18nInstance);
+      handleProcessStateError(elements, value, state);
       break;
 
     case 'loadingProcess.status':
-      handleLoadingProcessState(elements, value, i18nInstance);
+      handleLoadingProcessState(elements, value, state);
       break;
 
     case 'loadingProcess.loadingProcessError':
-      handleLoadingProcessError(elements, value, i18nInstance);
+      handleLoadingProcessError(elements, value, state);
       break;
 
     case 'feeds':
@@ -57,4 +73,5 @@ export default (elements, i18nInstance, state) => (path, value) => {
     default:
       break;
   }
+  renderFeedback(elements, state.form.feedback, i18nInstance);
 };

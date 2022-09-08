@@ -17,6 +17,7 @@ export default async () => {
       valid: true,
       processState: 'filling',
       processStateError: null,
+      feedback: null,
     },
     loadingProcess: {
       status: null,
@@ -52,6 +53,12 @@ export default async () => {
       posts: document.querySelector('.posts'),
     },
     languageSelector: document.querySelectorAll('[data-lng]'),
+    initialTexts: {
+      description: document.querySelector('p.lead'),
+      header: document.querySelector('h1.display-3'),
+      examples: document.querySelector('p.text-muted'),
+      input: document.querySelector('label[for="url-input"]'),
+    },
   };
 
   const watchedState = onChange(state, initView(elements, i18nInstance, state));

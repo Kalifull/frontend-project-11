@@ -1,6 +1,6 @@
 import isEmpty from 'lodash/isEmpty.js';
 
-export default (elements, error, i18nInstance) => {
+export default (elements, error, state) => {
   const { input, feedback } = elements.rssForm;
 
   const errorName = error?.name || error;
@@ -14,8 +14,7 @@ export default (elements, error, i18nInstance) => {
       input.classList.remove('is-invalid');
 
       feedback.classList.add('text-danger');
-      const errorMessage = i18nInstance.t('form.errorMessages.notContainValidRss');
-      feedback.textContent = errorMessage;
+      state.form.feedback = 'form.errorMessages.notContainValidRss';
       break;
     }
 
@@ -23,8 +22,7 @@ export default (elements, error, i18nInstance) => {
       input.classList.remove('is-invalid');
 
       feedback.classList.add('text-danger');
-      const errorMessage = i18nInstance.t('form.errorMessages.networkError');
-      feedback.textContent = errorMessage;
+      state.form.feedback = 'form.errorMessages.networkError';
       break;
     }
 

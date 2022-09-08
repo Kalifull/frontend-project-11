@@ -1,4 +1,4 @@
-export default (feedback, status, i18nInstance) => {
-  const statusMessage = i18nInstance.t(`loadingProcess.${status}`);
-  feedback.textContent = statusMessage;
+export default (elements, feedback, i18nInstance) => {
+  const messageFeedback = i18nInstance.t(feedback);
+  elements.rssForm.feedback.textContent = messageFeedback;
 };

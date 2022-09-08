@@ -17,5 +17,13 @@ export default {
     feeds: 'Feeds',
     posts: 'Posts',
     previewButton: 'View',
+    initialTexts: {
+      header: 'RSS aggregator',
+      description: "Start reading RSS today! It's easy, it's beautiful.",
+      input: 'RSS link',
+      examples: 'Example: https://ru.hexlet.io/lessons.rss',
+      submitButton: 'Add',
+      loading: '  Loading...',
+    },
   },
 };

@@ -1,6 +1,4 @@
-import renderFeedback from './renderFeedback.js';
-
-export default (elements, status, i18nInstance) => {
+export default (elements, status, state) => {
   const { feedback } = elements.rssForm;
 
   if (!status) {
@@ -10,20 +8,20 @@ export default (elements, status, i18nInstance) => {
   switch (status) {
     case 'idle': {
       feedback.classList.add('text-success');
-      renderFeedback(feedback, status, i18nInstance);
+      state.form.feedback = `loadingProcess.${status}`;
       break;
     }
 
     case 'loading': {
       feedback.classList.remove('text-danger');
       feedback.classList.remove('text-success');
-      renderFeedback(feedback, status, i18nInstance);
+      state.form.feedback = `loadingProcess.${status}`;
       break;
     }
 
     case 'failed': {
       feedback.classList.add('text-danger');
-      renderFeedback(feedback, status, i18nInstance);
+      state.form.feedback = `loadingProcess.${status}`;
       break;
     }
 
