@@ -4,15 +4,16 @@ export default {
       errorMessages: {
         notContainValidRss: 'The resource does not contain valid RSS',
         invalidUrl: 'Link must be a valid URL',
-        requiredField: 'The field must not be empty',
+        requiredField: 'Must not be empty',
         duplicateUrl: 'RSS already exists',
         networkError: 'Network error',
+        networkErrorUpdate:
+          'Trying to fetch new posts causes an error due to lack of network connection',
       },
     },
     loadingProcess: {
       idle: 'RSS uploaded successfully',
       loading: 'RSS is loading. Wait, please...',
-      failed: 'Oops... something went wrong =(. Please try again',
     },
     feeds: 'Feeds',
     posts: 'Posts',
@@ -21,6 +22,8 @@ export default {
       header: 'RSS aggregator',
       description: "Start reading RSS today! It's easy, it's beautiful.",
       input: 'RSS link',
+      link: 'Read completely',
+      closeButton: 'Close',
       examples: 'Example: https://ru.hexlet.io/lessons.rss',
       submitButton: 'Add',
       loading: '  Loading...',
