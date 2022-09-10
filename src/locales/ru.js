@@ -4,15 +4,16 @@ export default {
       errorMessages: {
         notContainValidRss: 'Ресурс не содержит валидный RSS',
         invalidUrl: 'Ссылка должна быть валидным URL',
-        requiredField: 'Поле не должно быть пустым',
+        requiredField: 'Не должно быть пустым',
         duplicateUrl: 'RSS уже существует',
         networkError: 'Ошибка сети',
+        networkErrorUpdate:
+          'Попытка получить новые посты вызывает ошибку из-за отсутсвия подключения к сети',
       },
     },
     loadingProcess: {
       idle: 'RSS успешно загружен',
       loading: 'Идет загрузка RSS. Пожалуйста, подождите...',
-      failed: 'Упс... что-то пошло не так =(. Попробуйте еще раз',
     },
     feeds: 'Фиды',
     posts: 'Посты',
@@ -21,6 +22,8 @@ export default {
       header: 'RSS агрегатор',
       description: 'Начните читать RSS сегодня! Это легко, это красиво.',
       input: 'Ссылка RSS',
+      link: 'Читать полностью',
+      closeButton: 'Закрыть',
       examples: 'Пример: https://ru.hexlet.io/lessons.rss',
       submitButton: 'Добавить',
       loading: '  Загрузка...',
