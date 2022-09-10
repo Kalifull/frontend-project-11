@@ -1,7 +1,7 @@
 import isEmpty from 'lodash/isEmpty.js';
 
 export default (elements, error, state) => {
-  const { input, feedback } = elements.rssForm;
+  const { input } = elements.rssForm;
 
   const errorName = error?.name || error;
 
@@ -12,16 +12,12 @@ export default (elements, error, state) => {
   switch (errorName) {
     case 'ParserError': {
       input.classList.remove('is-invalid');
-
-      feedback.classList.add('text-danger');
       state.form.feedback = 'form.errorMessages.notContainValidRss';
       break;
     }
 
     case 'AxiosError': {
       input.classList.remove('is-invalid');
-
-      feedback.classList.add('text-danger');
       state.form.feedback = 'form.errorMessages.networkError';
       break;
     }
