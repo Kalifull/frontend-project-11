@@ -12,7 +12,6 @@ export default (elements, error, state) => {
   switch (errorName) {
     case 'ValidationError': {
       input.classList.add('is-invalid');
-
       feedback.classList.remove('text-success');
       feedback.classList.add('text-danger');
       state.form.feedback = error.message.key;
