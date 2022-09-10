@@ -8,23 +8,29 @@ const routes = {
   usersPath: (url) => buildRequest(url),
 };
 
-const updater = (state) => {
+const updater = (state, timeout) => {
   const { feedsСontainer, postsСontainer } = state;
 
   feedsСontainer.map(async ({ url, id }) => {
-    const response = await axios.get(routes.usersPath(url));
-    const { posts } = parse(response, url);
+    try {
+      const response = await axios.get(routes.usersPath(url));
 
-    const addedPostList = posts.map((post) => ({ feedId: id, postId: uniqueId(), ...post }));
-    const currentPostList = postsСontainer.filter((post) => post.feedId === id);
-    const newPostList = differenceBy(addedPostList, currentPostList, 'link');
+      const { posts } = parse(response, url);
 
-    if (!isEmpty(newPostList)) {
-      postsСontainer.unshift(...newPostList);
+      const addedPostList = posts.map((post) => ({ ...post, feedId: id, postId: uniqueId() }));
+      const currentPostList = postsСontainer.filter((post) => post.feedId === id);
+      const newPostList = differenceBy(addedPostList, currentPostList, 'link');
+
+      if (!isEmpty(newPostList)) {
+        postsСontainer.unshift(...newPostList);
+      }
+    } catch {
+      state.loadingProcess.status = 'failed';
+      state.form.feedback = 'form.errorMessages.networkErrorUpdate';
     }
   });
 
-  setTimeout(() => updater(state), 5000);
+  setTimeout(() => updater(state, timeout), timeout);
 };
 
 export default updater;
