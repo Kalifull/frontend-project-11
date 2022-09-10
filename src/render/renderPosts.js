@@ -1,4 +1,4 @@
-export default (posts, i18nInstance) => {
+export default (posts, i18nInstance, state) => {
   const postsContainer = document.querySelector('.posts ul');
 
   const liElements = posts.map(({ title, link, postId }) => {
@@ -14,7 +14,8 @@ export default (posts, i18nInstance) => {
 
     const linkElement = document.createElement('a');
     linkElement.setAttribute('href', link);
-    linkElement.classList.add('fw-bold');
+    const classList = state.uiState.seenPosts.has(postId) ? 'fw-normal link-secondary' : 'fw-bold';
+    linkElement.setAttribute('class', classList);
     linkElement.dataset.id = postId;
     linkElement.setAttribute('target', '_blank');
     linkElement.textContent = title;
