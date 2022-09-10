@@ -23,7 +23,7 @@ export default (elements, processState, i18nInstance) => {
       submitButton.textContent = i18nInstance.t('initialTexts.submitButton');
       submitButton.disabled = false;
 
-      input.disabled = false;
+      input.removeAttribute('readonly');
       input.focus();
       break;
 
@@ -32,7 +32,7 @@ export default (elements, processState, i18nInstance) => {
       submitButton.disabled = true;
 
       input.classList.remove('is-invalid');
-      input.disabled = true;
+      input.setAttribute('readonly', true);
       break;
     }
 
@@ -47,7 +47,7 @@ export default (elements, processState, i18nInstance) => {
       submitButton.textContent = i18nInstance.t('initialTexts.submitButton');
       submitButton.disabled = false;
 
-      input.disabled = false;
+      input.removeAttribute('readonly');
       input.focus();
       break;
 

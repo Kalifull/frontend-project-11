@@ -1,4 +1,4 @@
-install-deps: # Install dependencies
+install: # Install dependencies
 	npm ci
 
 develop: # Run webpack serve
