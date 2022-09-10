@@ -16,12 +16,13 @@ export default async (url, watchedState) => {
 
     const { channel, posts } = parse(response, url);
 
-    watchedState.loadingProcess.status = 'idle';
     watchedState.form.processState = 'loaded';
 
     watchedState.feedsСontainer.unshift(channel);
     const postList = makePostList(channel, posts);
     watchedState.postsСontainer.unshift(...postList);
+
+    watchedState.loadingProcess.status = 'idle';
   } catch (error) {
     watchedState.loadingProcess.status = 'failed';
     watchedState.loadingProcess.loadingProcessError = error;
