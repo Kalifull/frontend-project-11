@@ -20,8 +20,8 @@ export default (elements, status, state) => {
     }
 
     case 'failed': {
+      feedback.classList.remove('text-success');
       feedback.classList.add('text-danger');
-      state.form.feedback = `loadingProcess.${status}`;
       break;
     }
 
