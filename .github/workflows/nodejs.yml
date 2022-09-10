@@ -29,10 +29,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install dependencies, build
-        run: |
-          make install-deps
-          make build
+      - name: Install dependencies
+        run: make install-deps
          # Add environment variables
         env:
           CI: true

@@ -1,6 +1,5 @@
 install-deps: # Install dependencies
 	npm ci
-	npm link
 
 develop: # Run webpack serve
 	npm run serve
